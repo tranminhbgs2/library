@@ -1,0 +1,40 @@
+
+<div class="row" style="margin-top: 50px;">
+  <!-- Column -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-sm-10">
+        <div class="card">
+          <div class="card-body">
+            <form #addForm=ngForm (ngSubmit)="addCate()" enctype="multipart/form-data">
+              <div class="form-body">
+                <h5 class="card-title">Thêm danh mục</h5>
+                <hr>
+                <div class="alert alert-danger" [hidden]="!error">
+                    {{error}}
+              </div>
+              <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label">Tên danh mục</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Tên danh mục" [(ngModel)]="form.title" required> </div>
+                    </div>
+                </div>
+              </div>
+              <hr>
+              <div class="form-actions m-t-40">
+                <button type="submit" class="btn btn-success m-r-5" [disabled]="!addForm.valid">
+                    <i class="fa fa-check"></i> Lưu lại
+                </button>
+                &nbsp;
+                <a class="btn btn-dark" [routerLink]="['/category']" routerLinkActive="router-link-active" >Hủy</a>
+                <!-- <button type="button" class="btn btn-dark" [routerLink]="['/category']" routerLinkActive="router-link-active" >Cancel</button> -->
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Column -->
+</div>

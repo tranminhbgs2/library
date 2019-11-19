@@ -1,0 +1,15 @@
+
+ <div style="margin: 10px; width: 500px; border-radius: 10px soild; border-color: aqua;">
+ <h1>Angular Bot</h1>
+
+ <ng-container *ngFor="let message of messages | async">
+   <div class="message" [ngClass]="{'form': message.sentBy === 'Bot',
+                                   'to': message.sentBy === 'user'}">
+     {{message.content}}
+   </div>
+ </ng-container>
+
+ <label for="nameField">Your Message</label>
+ <input type="text" [(ngModel)]="formValue" class="form-control" (keyup.enter)="senMessage()"><br>
+ <button (click)="senMessage()" class="btn btn-primary" type="reset">Gửi</button>
+</div>

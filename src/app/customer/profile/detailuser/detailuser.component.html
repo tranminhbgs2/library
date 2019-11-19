@@ -1,0 +1,279 @@
+<br>
+<div class="container">
+<div class="row">
+    <!-- Column -->
+    <div class="col-lg-4 col-xlg-3 col-md-5">
+        <div class="card">
+            <div class="card-body">
+                <div class="m-t-30 text-center">
+                  <ng-container *ngIf="user.avatar; else elseTemplate">
+                      <label class="hoverable" for="fileInput">
+                        <img [src]="url ? url : user.avatar">
+                        <div class="hover-text">Chọn ảnh</div>
+                        <div class="background"></div>
+                      </label>
+                        <br/>
+                        <input id="fileInput" type='file' (change)="fileSelect($event.target.files)">
+                      <!-- <img src="{{user.avatar}}" class="rounded-circle" width="150" /> -->
+                  </ng-container>
+                  <ng-template #elseTemplate>
+                    <label class="hoverable" for="fileInput">
+                      <img [src]="url ? url : imgurl">
+                      <div class="hover-text">Chọn ảnh</div>
+                      <div class="background"></div>
+                    </label>
+                  </ng-template>
+                  <h4 class="card-title m-t-10">{{user.name}}</h4>
+                </div>
+            </div>
+            <div>
+                <hr> </div>
+            <div class="card-body">
+                <small class="text-muted">Địa chỉ Email</small>
+                <h6>{{user.email}}</h6>
+                <small class="text-muted p-t-30 db">Số điện thoại</small>
+                <h6>{{ user.phone }}</h6>
+                <small class="text-muted p-t-30 db">Địa chỉ</small>
+                <h6>{{user.address}}</h6>
+                <!-- <div class="map-box">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d470029.1604841957!2d72.29955005258641!3d23.019996818380896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848aba5bd449%3A0x4fcedd11614f6516!2sAhmedabad%2C+Gujarat!5e0!3m2!1sen!2sin!4v1493204785508"
+                        width="100%" height="150" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div> -->
+                <small class="text-muted p-t-30 db">Mạng Xã hội</small>
+                <br/>
+                <button class="btn btn-circle btn-secondary">
+                    <i class="fab fa-facebook"></i>
+                </button>
+                <button class="btn btn-circle btn-secondary">
+                    <i class="fab fa-twitter"></i>
+                </button>
+                <button class="btn btn-circle btn-secondary">
+                    <i class="fab fa-youtube"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+    <!-- Column -->
+    <div class="col-lg-8 col-xlg-9 col-md-7">
+        <div class="card">
+            <ngb-tabset type="pills" class="custom-pills">
+                <ngb-tab title="Hồ sơ">
+                    <ng-template ngbTabContent>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3 col-xs-6 b-r">
+                                    <strong>Tên</strong>
+                                    <br>
+                                    <p class="text-muted">{{user.name}}</p>
+                                </div>
+                                <div class="col-md-3 col-xs-6 b-r">
+                                    <strong>Số điện thoại</strong>
+                                    <br>
+                                    <p class="text-muted">{{user.phone}}</p>
+                                </div>
+                                <div class="col-md-3 col-xs-6 b-r">
+                                    <strong>Email</strong>
+                                    <br>
+                                    <p class="text-muted">{{user.email}}</p>
+                                </div>
+                                <div class="col-md-3 col-xs-6">
+                                    <strong>Địa chỉ</strong>
+                                    <br>
+                                    <p class="text-muted">{{user.address}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <h4 class="font-medium m-t-30">Giới thiệu bản thân</h4>
+                            <ng-container *ngIf="user.story; else elseTemplate">
+                                <p class="m-t-30">{{user.story}}</p>
+                            </ng-container>
+                            <ng-template #elseTemplate>
+                                <p class="m-t-30">Bạn nên giới thiệu qua về bản thân để bạn bè của bạn có thể nhận ra</p>
+                            </ng-template>
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab title="Cập nhật thông tin">
+                    <ng-template ngbTabContent>
+                        <div class="card-body">
+                            <form class="form-horizontal form-material" [formGroup]="form" (ngSubmit)="editCustomer()">
+                              <div class="form-group">
+                                <label class="col-md-12">Mã User</label>
+                                <div class="col-md-12">
+                                    <input type="text" disabled formControlName="ma_customer" placeholder="123 456 7890" class="form-control form-control-line">
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                    <label class="col-md-12">Tên</label>
+                                    <div class="col-md-12">
+                                        <input type="text" formControlName="name" placeholder="Nhập tên User" class="form-control form-control-line">
+                                    </div>
+                                    <div class="alert alert-danger"
+                                      *ngIf="form.controls['name'].hasError('required') &&
+                                        form.get('name').touched">
+                                      Vui lòng Nhập tên của bạn!
+                                    </div>
+                                    <div class="alert alert-danger"
+                                      *ngIf="form.controls['name'].hasError('minlength') &&
+                                        form.get('name').touched">
+                                      Tên có độ dài trên 4 ký tự!
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="example-email" class="col-md-12">Email</label>
+                                    <div class="col-md-12">
+                                        <input type="email" formControlName="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email">
+                                    </div>
+                                    <div class="alert alert-danger"
+                                      *ngIf="form.controls['email'].hasError('required') &&
+                                        form.get('email').touched">
+                                      Vui lòng nhập Email!
+                                    </div>
+                                    <div class="alert alert-danger"
+                                      *ngIf="form.controls['email'].hasError('email') &&
+                                        form.get('email').touched">
+                                      Vui lòng điền đúng định dạng Email!
+                                    </div>
+                                </div>
+                                <!-- <div class="form-group">
+                                    <label class="col-md-12">Password</label>
+                                    <div class="col-md-12">
+                                        <input type="password" value="password" class="form-control form-control-line">
+                                    </div>
+                                </div> -->
+                                <div class="form-group">
+                                    <label class="col-md-12">Số điện thoại</label>
+                                    <div class="col-md-12">
+                                        <input type="text" formControlName="phone" placeholder="123 456 7890" class="form-control form-control-line">
+                                    </div>
+                                    <div class="alert alert-danger"
+                                      *ngIf="form.controls['phone'].hasError('required') &&
+                                        form.get('phone').touched">
+                                      Vui lòng nhập số điện thoại!
+                                    </div>
+                                    <div class="alert alert-danger"
+                                      *ngIf="form.controls['phone'].hasError('pattern') &&
+                                        form.get('phone').touched">
+                                      Vui lòng chỉ nhập số từ 0-9!
+                                    </div>
+                                    <div class="alert alert-danger"
+                                      *ngIf="(form.controls['phone'].hasError('minlength') || form.controls['phone'].hasError('maxlength')) &&
+                                        form.get('phone').touched">
+                                      Số điện thoại Phải là 10 chữ số!
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">Giới tính</label>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="customRadioInline1" formControlName="gender" name="gender" value="Nam" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadioInline1">Nam</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="customRadioInline2" formControlName="gender" name="gender" value="Nữ" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadioInline2">Nữ</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">Giới thiệu bản thân</label>
+                                    <div class="col-md-12">
+                                        <textarea formControlName="story" rows="5" class="form-control form-control-line"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-12">Địa chỉ</label>
+                                    <div class="col-sm-12">
+                                      <input type="text" class="form-control"
+                                        formControlName="address" placeholder="Nhập địa chỉ của bạn">
+                                    </div>
+                                    <div class="alert alert-danger"
+                                      *ngIf="form.controls['address'].hasError('required') &&
+                                        form.get('address').touched">
+                                      Vui lòng nhập địa chỉ!
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <button class="btn btn-success" [disabled]="form.invalid">Cập nhật</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab title="Đổi mật khẩu">
+                  <ng-template ngbTabContent>
+                      <div class="card-body">
+                          <div class="alert alert-danger col-md-12" *ngIf="error">
+                              {{error}}
+                            </div>
+                          <form class="form-horizontal form-material" [formGroup]="form1" (ngSubmit)="changepass()">
+                            <div class="form-group">
+                              <mat-form-field class="form-element col-md-12">
+                                <input matInput class="mat-body-2" autocomplete="new-password" name="password_old" placeholder="Mật khẩu cũ" [type]="hide ? 'text' : 'password'" formControlName="password_old" required>
+                                <mat-icon matSuffix (click)="hide_old = !hide_old">{{hide_old ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                <mat-error *ngIf="password_old.invalid && form1.get('password_old').touched">
+                                  <span class="mat-h3" *ngIf="form1.controls['password_old'].hasError('required')">
+                                  Vui lòng nhập mật khẩu!
+                                  </span>
+                                  <ng-container *ngIf="form1.controls['password_old'].hasError('pattern'); else second">
+                                    <span class="mat-h3">
+                                        Mật khẩu phải có 1 chữ in hoa, một chữ in thường, 1 số và ký tự đặc biệt!
+                                    </span>
+                                  </ng-container>
+                                  <ng-template #second>
+                                    <span class="mat-h3" *ngIf="form1.controls['password_old'].hasError('minlength')">
+                                      Mật khẩu phải dài hơn 8 ký tự!
+                                    </span>
+                                  </ng-template>
+                                </mat-error>
+                              </mat-form-field>
+                            </div>
+                            <div class="form-group">
+                              <mat-form-field class="form-element col-md-12">
+                                <input matInput class="mat-body-2" autocomplete="new-password" name="password" placeholder="Mật khẩu mới" [type]="hide ? 'text' : 'password'" formControlName="password" required>
+                                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                <mat-error *ngIf="password.invalid && form1.get('password').touched">
+                                  <span class="mat-h3" *ngIf="form1.controls['password'].hasError('required')">
+                                  Vui lòng nhập mật khẩu!
+                                  </span>
+                                  <ng-container *ngIf="form1.controls['password'].hasError('pattern'); else second">
+                                    <span class="mat-h3">
+                                        Mật khẩu phải có 1 chữ in hoa, một chữ in thường, 1 số và ký tự đặc biệt!
+                                    </span>
+                                  </ng-container>
+                                  <ng-template #second>
+                                    <span class="mat-h3" *ngIf="form1.controls['password'].hasError('minlength')">
+                                      Mật khẩu phải dài hơn 8 ký tự!
+                                    </span>
+                                  </ng-template>
+                                </mat-error>
+                              </mat-form-field>
+                            </div>
+                            <div class="form-group ">
+                              <mat-form-field class="form-element col-md-12">
+                                  <input matInput name="password_confirmation" autocomplete="new-password" placeholder="Nhập lại mật khẩu" [type]="confirm_hide ? 'text' : 'password'" formControlName="password_confirmation"
+                                  required>
+                                <mat-icon matSuffix (click)="confirm_hide = !confirm_hide">{{confirm_hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                <mat-error *ngIf="(password_confirmation.invalid && (password_confirmation.dirty || password_confirmation.touched || isSubmit) || form1.errors?.mismatch)">
+                                  <span class="mat-h3" *ngIf="password_confirmation.errors || form1.errors?.mismatch">
+                                    Mật khẩu không khớp
+                                  </span>
+                                </mat-error>
+                              </mat-form-field>
+                            </div>
+                            <div class="form-group">
+                              <div class="col-sm-12">
+                                  <button class="btn btn-success" [disabled]="form1.invalid">Đổi mật khẩu</button>
+                              </div>
+                            </div>
+                          </form>
+                      </div>
+                  </ng-template>
+              </ngb-tab>
+            </ngb-tabset>
+        </div>
+    </div>
+    <!-- Column -->
+</div>
+</div>

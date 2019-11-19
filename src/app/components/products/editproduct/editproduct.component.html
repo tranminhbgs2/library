@@ -1,0 +1,181 @@
+<br>
+<div class="container">
+  <div class="row">
+    <!-- Column -->
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+              <form #addForm=ngForm (ngSubmit)="editProduct()" enctype="multipart/form-data">
+                    <div class="form-body">
+                        <div class="col-md-12 text-right">
+                          <a [routerLink]="['/product']" class="btn btn-outline-primary col-md-2 col-sm-2" routerLinkActive="router-link-active" >Quay lại</a>
+                        </div>
+                        <br>
+                        <h5 class="card-title">Sửa sách</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Tên sách</label>
+                                    <input type="text" id="name" name="name" class="form-control" placeholder="Tên sách" [(ngModel)]="form.name" required> </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Kích thước</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon2">
+                                                <i class="fas fas-cut"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" id="size" name="size" placeholder="Kích thước" [(ngModel)]="form.size" required aria-label="Stock" aria-describedby="basic-addon2">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Cân nặng</label>
+                                    <input type="text" id="weight" class="form-control" name="weight" [(ngModel)]="form.weight" placeholder="Nhập cân nặng của sách"> </div>
+                            </div>
+                            <!-- Nhà xuất bản -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Nhà xuất bản</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon2">
+                                                <i class="fas fas-cut"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" name="company" placeholder="Nhà xuất bản" [(ngModel)]="form.company" required aria-label="cpmany" aria-describedby="basic-addon2">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Danh mục</label>
+                                    <select class="form-control" name="category_id" [(ngModel)]="form.categories_id"
+                                     data-placeholder="Choose a Category" tabindex="1">
+                                        <!-- <option value="Chọn" [selected]>---Chọn---</option> -->
+                                        <option *ngFor="let category of category" [selected]="form.categories_id === category.id" value="{{category.id}}">
+                                          {{category.title}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Tác giả -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Tác giả</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon2">
+                                                <i class="fas fas-cut"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" name="author" placeholder="Tác giả" [(ngModel)]="form.author" required aria-label="Author" aria-describedby="basic-addon2">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Price</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <i class="fas fa-dollar-sign"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" name="price" placeholder="price" [(ngModel)]="form.price" required aria-label="price" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Dịch giả</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon2">
+                                                <i class="fas fas-cut"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" name="translator" placeholder="Dịch giả" [(ngModel)]="form.translator" required aria-label="translator" aria-describedby="basic-addon2">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Nhà phát hành</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon2">
+                                                <i class="fas fas-cut"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" name="pushlisher" placeholder="Nhà phát hành" [(ngModel)]="form.pushlisher" required aria-label="pushlisher" aria-describedby="basic-addon2">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+
+                        <h5 class="card-title m-t-40">Mô tả ngắn</h5>
+                        <div class="row">
+                            <div class="col-md-12 ">
+                                <div class="form-group">
+                                    <textarea class="form-control" name="description" rows="2" [(ngModel)]="form.description">
+
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <h5 class="card-title m-t-40">Một trích đoạn của cuốn sách</h5>
+                        <div class="row">
+                            <div class="col-md-12 ">
+                                <div class="form-group">
+                                    <textarea class="form-control" name="contents" rows="4" [(ngModel)]="form.contents">
+                                      {{form.contents}}
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="col-md-3 col-sm-12">
+                                <h5 class="card-title m-t-20">Tải ảnh</h5>
+                                <div class="el-element-overlay">
+                                    <div class="el-card-item">
+                                        <div class="el-card-avatar el-overlay-1">
+                                            <img [src]="imgUrl" alt="user"  class="col-10"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="btn btn-info waves-effect waves-light">
+                                  <span>Tải ảnh sản phẩm</span>
+                                  <input type="file" class="upload" (change)="fileSelect($event.target.files)">
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    <div class="form-actions m-t-40">
+                        <button type="submit" class="btn btn-success m-r-5" [disabled]="!addForm.valid">
+                            <i class="fa fa-check"></i> Lưu lại</button>
+                        <button type="button" class="btn btn-dark">Hủy</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+  </div>
+</div>

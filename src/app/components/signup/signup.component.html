@@ -1,1 +1,95 @@
-<p>signup works!</p>
+<div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url(assets/images/big/backgroud.jpg); height: 100%;">
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-12">
+          <!-- <span class="db"><img src="assets/images/logo-icon.png" alt="logo" /></span> -->
+          <h5 class="font-medium m-b-20 text-center mat-display-2">Đăng ký tài khoản</h5>
+      </div>
+      <div class="alert alert-danger col-md-12" *ngIf="error.email">
+        Email đã tồn tại!
+      </div>
+      <!-- Form -->
+      <!-- <div class="row"> -->
+      <div class="col-md-8 col-sm-12">
+          <form class="form-horizontal m-t-20" [formGroup]="form" (ngSubmit)="onSubmit()">
+              <div class="form-group ">
+                <mat-form-field class="form-element col-md-12">
+                  <input matInput placeholder="Nhập tên" autocomplete="name" formControlName="name" required>
+                  <mat-icon matSuffix>account_circle</mat-icon>
+                  <mat-error
+                    *ngIf="form.controls['name'].hasError('required') &&
+                      form.get('name').touched">
+                    <span class="mat-h3">Vui lòng Nhập tên của bạn!</span>
+                  </mat-error>
+                  <mat-error
+                    *ngIf="form.controls['name'].hasError('minlength') &&
+                      form.get('name').touched">
+                      <span class="mat-h3">Tên có độ dài trên 4 ký tự!</span>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="form-group ">
+                  <mat-form-field class="form-element col-md-12">
+                    <input matInput autocomplete="email" placeholder="Nhập email" formControlName="email" required>
+                    <mat-icon matSuffix>email</mat-icon>
+                  <mat-error
+                    *ngIf="form.controls['email'].hasError('required') &&
+                    form.get('email').touched">
+                    <span class="mat-h3">Vui lòng nhập Email!</span>
+                  </mat-error>
+                  <mat-error
+                  *ngIf="form.controls['email'].hasError('email') &&
+                    form.get('email').touched">
+                    <span class="mat-h3">Vui lòng điền đúng định dạng Email!</span>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="form-group ">
+                <mat-form-field class="form-element col-md-12">
+                  <input matInput class="mat-body-2" autocomplete="new-password" name="password" placeholder="Password" [type]="hide ? 'text' : 'password'" formControlName="password" required>
+                  <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  <mat-error *ngIf="password.invalid && form.get('password').touched">
+                    <span class="mat-h3" *ngIf="form.controls['password'].hasError('required')">
+                    Vui lòng nhập mật khẩu!
+                    </span>
+                    <ng-container *ngIf="form.controls['password'].hasError('pattern'); else second">
+                      <span class="mat-h3">
+                          Mật khẩu phải có 1 chữ in hoa, một chữ in thường, 1 số và ký tự đặc biệt!
+                      </span>
+                    </ng-container>
+                    <ng-template #second>
+                      <span class="mat-h3" *ngIf="form.controls['password'].hasError('minlength')">
+                        Mật khẩu phải dài hơn 8 ký tự!
+                      </span>
+                    </ng-template>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="form-group ">
+                  <mat-form-field class="form-element col-md-12">
+                      <input matInput name="password_confirmation" autocomplete="current-password" placeholder="Nhập lại mật khẩu" [type]="confirm_hide ? 'text' : 'password'" formControlName="password_confirmation"
+                      required>
+                    <mat-icon matSuffix (click)="confirm_hide = !confirm_hide">{{confirm_hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-error *ngIf="(password_confirmation.invalid && (password_confirmation.dirty || password_confirmation.touched || isSubmit) || form.errors?.mismatch)">
+                      <span class="mat-h3" *ngIf="password_confirmation.errors || form.errors?.mismatch">
+                        Mật khẩu không khớp
+                      </span>
+                    </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="form-group text-center ">
+                  <div class="col-xs-12 p-b-20 ">
+                      <button class="btn btn-block btn-lg btn-info " type="submit " [disabled]="!form.valid">Đăng ký</button>
+                  </div>
+              </div>
+              <div class="form-group m-b-0 m-t-10 ">
+                  <div class="col-sm-12 text-center ">
+                      Bạn đã có tài khoản? <a routerLink="/login" class="text-info m-l-5 "><b>Đăng nhập</b></a>
+                  </div>
+              </div>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+

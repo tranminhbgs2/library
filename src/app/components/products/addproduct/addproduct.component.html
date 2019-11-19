@@ -1,0 +1,270 @@
+<br>
+<div class="container">
+  <div class="row">
+    <!-- Column -->
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+              <form [formGroup]="form" (ngSubmit)="addProduct()">
+                    <div class="form-body">
+                        <div class="col-md-12 text-right">
+                          <a [routerLink]="['/product']" class="btn btn-outline-primary col-md-2 col-sm-2" routerLinkActive="router-link-active" >Quay lại</a>
+                        </div>
+                        <br>
+                        <h5 class="card-title">Thêm sách</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                  <label class="control-label">Tên sách<span class="text-danger">*</span></label>
+                                  <div class="input-group mb-3">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon2">
+                                          <i class="material-icons">
+                                              book
+                                          </i>
+                                        </span>
+                                      </div>
+                                      <input type="text" id="name" name="name" class="form-control" placeholder="Tên sách" formControlName="name" required>
+                                  </div>
+                                  <div class="alert alert-danger"
+                                    *ngIf="form.controls['name'].hasError('required') &&
+                                      form.get('name').touched">
+                                    Vui lòng Nhập tên sách!
+                                  </div>
+                                  <div class="alert alert-danger"
+                                    *ngIf="form.controls['name'].hasError('minlength') &&
+                                      form.get('name').touched">
+                                    Tên có độ dài trên 4 ký tự!
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                  <label>Kích thước<span class="text-danger">*</span></label>
+                                  <div class="input-group mb-3">
+                                      <div class="input-group-prepend">
+                                          <span class="input-group-text" id="basic-addon2">
+                                              <i class="material-icons">
+                                                  photo_size_select_small
+                                              </i>
+                                          </span>
+                                      </div>
+                                      <input type="text" class="form-control" id="size" name="size" placeholder="Kích thước" formControlName="size" required aria-label="Stock" aria-describedby="basic-addon2">
+                                  </div>
+                                  <div class="alert alert-danger"
+                                    *ngIf="form.controls['size'].hasError('required') &&
+                                      form.get('size').touched">
+                                    Vui lòng Nhập kích thước của sách!
+                                  </div>
+                                  <div class="alert alert-danger"
+                                    *ngIf="form.controls['size'].hasError('maxlength') &&
+                                      form.get('size').touched">
+                                    Kích thước có độ dài tối đa là 15 ký tự!
+                                  </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                  <label class="control-label">Cân nặng<span class="text-danger">*</span></label>
+                                  <div class="input-group mb-3">
+                                      <div class="input-group-prepend">
+                                          <span class="input-group-text" id="basic-addon2">
+                                              <i class="material-icons">
+                                                  swap_vert
+                                              </i>
+                                          </span>
+                                      </div>
+                                      <input type="text" id="weight" class="form-control" name="weight" formControlName="weight" placeholder="Nhập cân nặng của sách">
+                                  </div>
+                                  <div class="alert alert-danger"
+                                    *ngIf="form.controls['weight'].hasError('required') &&
+                                      form.get('weight').touched">
+                                    Vui lòng nhập cân nặng của sách!
+                                  </div>
+                                </div>
+                            </div>
+                            <!-- Nhà xuất bản -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                  <label>Nhà xuất bản<span class="text-danger">*</span></label>
+                                  <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text" id="basic-addon2">
+                                        <i class="material-icons">
+                                        camera_roll
+                                        </i>
+                                      </span>
+                                    </div>
+                                      <input type="text" class="form-control" name="company" placeholder="Nhà xuất bản" formControlName="company" required aria-label="cpmany" aria-describedby="basic-addon2">
+                                  </div>
+                                  <div class="alert alert-danger"
+                                    *ngIf="form.controls['company'].hasError('required') &&
+                                      form.get('company').touched">
+                                    Vui lòng nhập nhà xuất bản sách!
+                                  </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Danh mục<span class="text-danger">*</span></label>
+                                    <select class="form-control" name="category_id" formControlName="category_id"
+                                     data-placeholder="Choose a Category" tabindex="1">
+                                        <!-- <option value="Chọn" [selected]>---Chọn---</option> -->
+                                        <option *ngFor="let category of category"  value="{{category.id}}">
+                                          {{category.title}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Tác giả -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                  <label>Tác giả<span class="text-danger">*</span></label>
+                                  <div class="input-group mb-3">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon2">
+                                          <i class="material-icons">
+                                              person
+                                          </i>
+                                        </span>
+                                      </div>
+                                      <input type="text" class="form-control" name="author" placeholder="Tác giả" formControlName="author" required aria-label="Author" aria-describedby="basic-addon2">
+                                  </div>
+                                  <div class="alert alert-danger"
+                                    *ngIf="form.controls['author'].hasError('required') &&
+                                      form.get('author').touched">
+                                    Vui lòng nhập tên tác giả!
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Giá sách<span class="text-danger">*</span></label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <i class="fas fa-dollar-sign"></i>
+                                        </span>
+                                    </div>
+                                    <input type="number" class="form-control" name="price" placeholder="Nhập giá sách" formControlName="price" required aria-label="price" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="alert alert-danger"
+                                    *ngIf="form.controls['price'].hasError('required') &&
+                                      form.get('price').touched">
+                                    Vui lòng nhập giá sách!
+                                  </div>
+                                  <div class="alert alert-danger"
+                                    *ngIf="form.controls['price'].hasError('minlength') &&
+                                      form.get('price').touched">
+                                    Giá sách có độ dài tối đa là 10 ký tự!
+                                  </div>
+                              </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Dịch giả</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon2">
+                                                <i class="material-icons">
+                                                record_voice_over
+                                                </i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" name="translator" placeholder="Dịch giả" formControlName="translator" required aria-label="translator" aria-describedby="basic-addon2">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                  <label>Nhà phát hành<span class="text-danger">*</span></label>
+                                  <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text" id="basic-addon2">
+                                          <i class="material-icons">
+                                              assignment_ind
+                                          </i>
+                                      </span>
+                                    </div>
+                                      <input type="text" class="form-control" name="pushlisher" placeholder="Nhà phát hành" formControlName="pushlisher" required aria-label="pushlisher" aria-describedby="basic-addon2">
+                                </div>
+                                <div class="alert alert-danger"
+                                    *ngIf="form.controls['pushlisher'].hasError('required') &&
+                                      form.get('pushlisher').touched">
+                                    Vui lòng nhập nhà phát hành!
+                                  </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+
+                        <h5 class="card-title m-t-40">Mô tả ngắn</h5>
+                        <div class="row">
+                            <div class="col-md-12 ">
+                                <div class="form-group">
+                                    <textarea class="form-control" name="description" rows="2" formControlName="description"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <h5 class="card-title m-t-40">Một trích đoạn của cuốn sách</h5>
+                        <div class="row">
+                            <div class="col-md-12 ">
+                                <div class="form-group">
+                                    <textarea class="form-control" name="content" rows="4" formControlName="content"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <h5 class="card-title m-t-20">Upload Image</h5>
+                            <div class="el-element-overlay">
+                                <div class="el-card-item">
+                                    <div class="el-card-avatar el-overlay-1">
+                                        <img [src]="imgUrrl" alt="user"  class="col-10"/>
+                                        <!-- <div class="el-overlay">
+                                            <ul class="list-style-none el-info">
+                                                <li class="el-item">
+                                                    <a class="btn default btn-outline image-popup-vertical-fit el-link" href="assets/images/gallery/chair3.jpg">
+                                                        <i class="icon-magnifier"></i>
+                                                    </a>
+                                                </li>
+                                                <li class="el-item">
+                                                    <a class="btn default btn-outline el-link" href="javascript:void(0);">
+                                                        <i class="icon-link"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="btn btn-info waves-effect waves-light">
+                                <span>Tải ảnh sản phẩm</span>
+                                <input type="file" class="upload" (change)="fileSelect($event.target.files)" required> </div>
+                        </div>
+                    </div>
+                        <hr>
+                    <div class="form-actions m-t-40">
+                        <button type="submit" class="btn btn-success m-r-5" [disabled]="!form.valid">
+                            <i class="fa fa-check"></i> Thêm</button>
+                        <button type="button" class="btn btn-dark">Hủy</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+  </div>
+</div>

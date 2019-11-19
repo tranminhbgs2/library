@@ -1,4 +1,64 @@
-<nav class="navbar navbar-light bg-light justify-content-between">
-  <a class="navbar-brand">Navbar</a>
-  <a class="navbar-brand" href="">Login</a>
-</nav>
+<mat-toolbar color="primary" class="d-flex col-md-12 col-sm-12">
+  <mat-toolbar-row class="col-sm-12" >
+    <button mat-icon-button>
+      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+    </button>
+    <!-- <h1>Fruit</h1> -->
+    <!-- <span class="menu-spacer"></span> -->
+    <div class="p-2" fxShow="true" fxHide.lt-md="true">
+      <!-- <a mat-button routerLink="/profile" routerLinkActive="active" *ngIf="loggedIn && role_id == 1"> Hồ sơ cá nhân </a> -->
+      <a mat-button routerLink="/product" routerLinkActive="active" *ngIf="loggedIn && role_id === 1">Sản phẩm</a>
+      <a mat-button routerLink="/category" routerLinkActive="active" *ngIf="loggedIn && role_id === 1"> Danh mục sản phẩm </a>
+      <a mat-button routerLink="/customer" routerLinkActive="active" *ngIf="loggedIn && role_id === 1"> Danh sách User </a>
+      <a mat-button routerLink="/ticket" routerLinkActive="active" *ngIf="loggedIn && role_id === 1"> Phiếu mượn sách </a>
+      <a mat-button routerLink="/customers/profile" routerLinkActive="active" *ngIf="loggedIn && role_id == 3"> Hồ sơ cá nhân </a>
+      <a mat-button routerLink="/customers/product" routerLinkActive="active" *ngIf="loggedIn && role_id === 3">Sách</a>
+      <a mat-button routerLink="/customers/ticket" routerLinkActive="active" *ngIf="loggedIn && role_id === 3"> Phiếu mượn sách </a>
+      <a mat-button routerLink="/customers/chat" routerLinkActive="active" > Chatbot </a>
+    </div>
+    <div class="ml-auto p-2">
+      <a class="navbar-brand p-2" routerLink="login" *ngIf="!loggedIn">Login</a>
+      <a mat-button (click)="logout($event)" *ngIf="loggedIn">Logout</a>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+        <a mat-list-item routerLink="/product" routerLinkActive="active" *ngIf="loggedIn && role_id === 1">Sản phẩm</a>
+        <a mat-list-item routerLink="/category" routerLinkActive="active" *ngIf="loggedIn && role_id === 1"> Danh mục sản phẩm </a>
+        <a mat-list-item routerLink="/customer" routerLinkActive="active" *ngIf="loggedIn && role_id === 1"> Danh sách User </a>
+        <a mat-list-item routerLink="/ticket" routerLinkActive="active" *ngIf="loggedIn && role_id === 1"> Phiếu mượn sách </a>
+        <a mat-list-item routerLink="/customers/profile" routerLinkActive="active" *ngIf="loggedIn && role_id == 3"> Hồ sơ cá nhân </a>
+        <a mat-list-item routerLink="/customers/product" routerLinkActive="active" *ngIf="loggedIn && role_id === 3">Sách</a>
+        <a mat-list-item routerLink="/customers/ticket" routerLinkActive="active" *ngIf="loggedIn && role_id === 3"> Phiếu mượn sách </a>
+        <a mat-list-item (click)="logout($event)" *ngIf="loggedIn">Logout</a>
+        <a mat-list-item (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content style="margin-top: 15px; min-height:485px;">
+      <router-outlet></router-outlet>
+      <div style="width: 350px; float: right; position: inherit; top: 75px;">
+          <button mat-icon-button style="width: 350px;">
+              <div class="bg-success" (click)="showhide()">
+              ChatBot
+            </div>
+          </button>
+
+        <div *ngIf="show">
+          <iframe
+          allow="microphone;"
+          width="350"
+          height="430"
+          src="https://console.dialogflow.com/api-client/demo/embedded/18439fd4-0f83-48bd-9b5a-8ce78f6c8e2a">
+        </iframe>
+        </div>
+      </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+

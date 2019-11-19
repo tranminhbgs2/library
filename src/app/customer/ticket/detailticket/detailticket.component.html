@@ -1,0 +1,148 @@
+<hr>
+<div class="container">
+<div class="row">
+    <!-- Column -->
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+              <div class="col-md-12 text-right">
+                <a [routerLink]="['/customers/ticket']" class="btn btn-outline-primary col-md-2 col-sm-2" routerLinkActive="router-link-active" >Quay lại</a>
+              </div>
+              <div class="col-md-12">
+                <span class="card-title display-4 col-md-10 col-sm-12">{{form.name}}</span>
+              </div>
+                <!-- <h6 class="card-subtitle">globe type chair for rest</h6> -->
+                <hr>
+                <div class="row">
+                  <div class="col-lg-5 col-md-5 col-sm-6">
+                      <div class="white-box text-center">
+                          <img src="{{form.img}}" class="img-responsive"> </div>
+                  </div>
+                  <div class="col-lg-7 col-md-7 col-sm-6">
+                      <h3 class="box-title m-t-40">Thông tin mượn sách</h3>
+                      <div class="table-responsive">
+                          <table class="table">
+                              <tbody>
+                                  <tr>
+                                      <td>Tên user</td>
+                                      <td> {{ticket.name_user}} </td>
+                                  </tr>
+                                  <tr>
+                                      <td>Mã mượn sách</td>
+                                      <td> {{ticket.code}} </td>
+                                  </tr>
+                                  <tr>
+                                      <td>Ngày mượn</td>
+                                      <td> {{ticket.date_active}} </td>
+                                  </tr>
+                                  <tr>
+                                      <td>Ngày trả</td>
+                                      <td> {{ticket.date_back}} </td>
+                                  </tr>
+                                  <tr>
+                                    <td>Trạng thái mượn</td>
+                                    <td>
+                                      <ng-container *ngIf="ticket.status_detail === 1; else elseTemplate">
+                                        <span class="badge badge-success">Đã duyệt</span>
+                                      </ng-container>
+                                      <ng-template #elseTemplate>
+                                        <ng-container *ngIf="ticket.status_detail === 0; else third">
+                                            <span class="badge badge-secondary">Chờ duyệt</span>
+                                            <span class="badge badge-warning">Phiếu sẽ được xem xét trong vòng 24h! Nếu không đủ yêu cầu phiếu mượn sẽ bị xóa!</span>
+                                        </ng-container>
+
+                                      </ng-template>
+                                      <ng-template #third>
+                                          <!-- <mat-slide-toggle
+                                          [(ngModel)]="checked"
+                                          [color]="accent"
+                                          (change)="changed(row.ticket_id)">
+                                        </mat-slide-toggle> -->
+                                        <span class="badge badge-success">Sách đã được trả</span>
+                                      </ng-template>
+                                    </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                      <!-- <ul class="list-unstyled">
+                          <li>
+                              <i class="fa fa-check text-success"></i> Tên user: {{ticket.name_user}}
+                          </li>
+                          <li>
+                              <i class="fa fa-check text-success"></i> Mã mượn sách: {{ticket.code}}
+                          </li>
+                          <li>
+                              <i class="fa fa-check text-success"></i> Ngày mượn: {{ticket.date_active}}
+                          </li>
+                          <li>
+                              <i class="fa fa-check text-success"></i> Ngày trả: {{ticket.date_back}}
+                          </li>
+                          <li>
+                              <i class="fa fa-check text-success"></i> Trạng thái mượn:
+                                <ng-container *ngIf="ticket.status_detail === 1; else elseTemplate">
+                                  <span class="text-success">Đã duyệt</span>
+                                </ng-container>
+                                <ng-template #elseTemplate>
+                                  <span class="text-secondary">Chờ duyệt</span>
+                                </ng-template>
+                          </li>
+                      </ul> -->
+                  </div>
+                </div>
+                    <hr>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <h3 class="box-title m-t-40">Các thông tin khác</h3>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>Tác giả</td>
+                                        <td> {{form.author}} </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nhà xuất bản</td>
+                                        <td> {{form.company}} </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nhà phát hành</td>
+                                        <td> {{form.pushlisher}} </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kích thước</td>
+                                        <td> {{form.size}} </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Thể loại</td>
+                                        <ng-container *ngFor="let cate of category" >
+                                          <td *ngIf="cate.id == form.categories_id">{{ cate?.title}}</td>
+                                       </ng-container>
+                                    </tr>
+                                    <tr>
+                                        <td>Dịch giả</td>
+                                        <td> {{form.translator}} </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cân nặng</td>
+                                        <td> {{form.weight}} </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                  <!-- <article class="card col-lg-12 col-md-12 col-sm-12">
+                    <div class="card-body">
+                      <h4>Trích đoạn của truyện</h4>
+                    {{form.content}}
+                    </div>
+                  </article>
+                  <hr> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+</div>
+<br>

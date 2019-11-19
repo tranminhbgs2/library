@@ -1,1 +1,73 @@
-<p>response-reset works!</p>
+
+<div class="auth-wrapper d-flex no-block justify-content-center align-items-center">
+  <div class="auth-box">
+      <div>
+          <div class="logo">
+            <span class="db"><img src="assets/images/logo-icon.png" alt="logo" /></span>
+            <h5 class="font-medium m-b-20 text-primary" style="text-align: center;" >Đặt lại mật khẩu</h5>
+          </div>
+          <!-- Form -->
+          <div class="row">
+            <!-- <div class="input-group mb-3"> -->
+              <form class="form-horizontal form-material" [formGroup]="form1" (ngSubmit)="onSubmit()" style="margin: auto; min-width: 400px;">
+                <div class="form-group">
+                  <mat-form-field class="form-element col-md-12">
+                    <input matInput class="mat-body-2" autocomplete="email" name="email" placeholder="Nhập email" formControlName="email" required>
+                    <mat-error *ngIf="form1.controls['email'].hasError('required') &&
+                    form1.get('email').touched">
+                      <span class="mat-h3" *ngIf="form1.controls['email'].hasError('required')">
+                      Vui lòng nhập mật khẩu!
+                      </span>
+                      <ng-container *ngIf="form1.controls['email'].hasError('email') &&
+                      form1.get('email').touched">
+                        <span class="mat-h3">
+                            Vui lòng nhập đúng định dạng Email!
+                        </span>
+                      </ng-container>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="form-group">
+                  <mat-form-field class="form-element col-md-12">
+                    <input matInput class="mat-body-2" autocomplete="new-password" name="password" placeholder="Mật khẩu mới" [type]="hide ? 'text' : 'password'" formControlName="password" required>
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-error *ngIf="password.invalid && form1.get('password').touched">
+                      <span class="mat-h3" *ngIf="form1.controls['password'].hasError('required')">
+                      Vui lòng nhập mật khẩu!
+                      </span>
+                      <ng-container *ngIf="form1.controls['password'].hasError('pattern'); else second">
+                        <span class="mat-h3">
+                            Mật khẩu phải có 1 chữ in hoa, một chữ in thường, 1 số và ký tự đặc biệt!
+                        </span>
+                      </ng-container>
+                      <ng-template #second>
+                        <span class="mat-h3" *ngIf="form1.controls['password'].hasError('minlength')">
+                          Mật khẩu phải dài hơn 8 ký tự!
+                        </span>
+                      </ng-template>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="form-group ">
+                  <mat-form-field class="form-element col-md-12">
+                      <input matInput name="password_confirmation" autocomplete="new-password" placeholder="Nhập lại mật khẩu" [type]="confirm_hide ? 'text' : 'password'" formControlName="password_confirmation"
+                      required>
+                    <mat-icon matSuffix (click)="confirm_hide = !confirm_hide">{{confirm_hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-error *ngIf="(password_confirmation.invalid && (password_confirmation.dirty || password_confirmation.touched || isSubmit) || form1.errors?.mismatch)">
+                      <span class="mat-h3" *ngIf="password_confirmation.errors || form1.errors?.mismatch">
+                        Mật khẩu không khớp
+                      </span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-12" style="text-align: center;">
+                      <button class="btn btn-success" [disabled]="form1.invalid">Đổi mật khẩu</button>
+                  </div>
+                </div>
+              </form>
+            <!-- </div> -->
+          </div>
+      </div>
+  </div>
+</div>

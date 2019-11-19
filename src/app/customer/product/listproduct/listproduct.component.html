@@ -1,0 +1,51 @@
+<br>
+<div class="container">
+  <div class="row">
+    <div fxLayout fxLayoutAlign="center center" style="margin: 5px 20px;">
+      <mat-form-field fxFlex="40%">
+        <input matInput type="text" [(ngModel)]="searchText" placeholder="Tìm kiếm">
+      </mat-form-field>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="card-deck col-md-12 col-sm-12">
+      <div class="card col-md-4 col-sm-12" *ngFor="let book of book | filter: searchText | paginate: { itemsPerPage: 4, currentPage: p }">
+        <img class="card-img-top" height="300px" src="{{book.img}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{book.name}}</h5>
+          <p class="card-text">Mô tả: {{book.description}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Tác giả: {{book.author}}</li>
+          <li class="list-group-item">Kích thước: {{book.size}}</li>
+          <li class="list-group-item">Nhà xuất bản: {{book.company}}</li>
+        </ul>
+        <div class="card-footer">
+          <a routerLink="/customers/product/detail-product/{{book.slug}}" routerLinkActive="router-link-active"  class="btn btn-primary">Chi tiết</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row col-md-12 d-flex justify-content-center">
+      <pagination-controls (pageChange)="p = $event" previousLabel="Trước" nextLabel="Tiếp"
+      screenReaderPaginationLabel="Phân trang"
+      screenReaderPageLabel="Trang"
+      screenReaderCurrentLabel="Bạn đang ở trang">
+
+      </pagination-controls>
+    <!-- <pagination-controls  id="pagi"
+                      (pageChange)="p"
+                      maxSize="4"
+                      directionLinks="true"
+                      autoHide="true"
+                      responsive="true"
+                      previousLabel="Trước"
+                      nextLabel="Tiếp"
+                      screenReaderPaginationLabel="Phân trang"
+                      screenReaderPageLabel="Trang"
+                      screenReaderCurrentLabel="Bạn đang ở trang">
+</pagination-controls> -->
+  </div>
+</div>
