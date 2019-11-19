@@ -7,14 +7,14 @@
     <!-- <span class="menu-spacer"></span> -->
     <div class="p-2" fxShow="true" fxHide.lt-md="true">
       <!-- <a mat-button routerLink="/profile" routerLinkActive="active" *ngIf="loggedIn && role_id == 1"> Hồ sơ cá nhân </a> -->
-      <a mat-button routerLink="/product" routerLinkActive="active" *ngIf="loggedIn && role_id === 1">Sản phẩm</a>
-      <a mat-button routerLink="/category" routerLinkActive="active" *ngIf="loggedIn && role_id === 1"> Danh mục sản phẩm </a>
+      <a mat-button routerLink="/product" routerLinkActive="active" *ngIf="loggedIn && role_id === 1">Sách</a>
+      <a mat-button routerLink="/category" routerLinkActive="active" *ngIf="loggedIn && role_id === 1"> Danh mục Sách </a>
       <a mat-button routerLink="/customer" routerLinkActive="active" *ngIf="loggedIn && role_id === 1"> Danh sách User </a>
-      <a mat-button routerLink="/ticket" routerLinkActive="active" *ngIf="loggedIn && role_id === 1"> Phiếu mượn sách </a>
+      <a mat-button routerLink="/ticket" routerLinkActive="active" *ngIf="loggedIn && role_id === 1"> Phiếu mượn sách của User </a>
       <a mat-button routerLink="/customers/profile" routerLinkActive="active" *ngIf="loggedIn && role_id == 3"> Hồ sơ cá nhân </a>
       <a mat-button routerLink="/customers/product" routerLinkActive="active" *ngIf="loggedIn && role_id === 3">Sách</a>
       <a mat-button routerLink="/customers/ticket" routerLinkActive="active" *ngIf="loggedIn && role_id === 3"> Phiếu mượn sách </a>
-      <a mat-button routerLink="/customers/chat" routerLinkActive="active" > Chatbot </a>
+      <!-- <a mat-button routerLink="/customers/chat" routerLinkActive="active" > Chatbot </a> -->
     </div>
     <div class="ml-auto p-2">
       <a class="navbar-brand p-2" routerLink="login" *ngIf="!loggedIn">Login</a>
@@ -39,7 +39,7 @@
   </mat-sidenav>
   <mat-sidenav-content style="margin-top: 15px; min-height:485px;">
       <router-outlet></router-outlet>
-      <div style="width: 350px; float: right; position: inherit; top: 75px;">
+      <div style="width: 350px; float: right; top: 75px;" *ngIf="loggedIn && role_id == 3">
           <button mat-icon-button style="width: 350px;">
               <div class="bg-success" (click)="showhide()">
               ChatBot

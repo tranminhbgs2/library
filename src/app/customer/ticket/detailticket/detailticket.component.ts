@@ -36,7 +36,7 @@ export class DetailticketComponent implements OnInit {
     company: null,
     pushlisher: null,
     translator: null,
-    category_id: null,
+    categories_id: null,
     content: null,
     rating: null
   };

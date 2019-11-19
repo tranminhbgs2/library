@@ -128,6 +128,8 @@ export class JarwisService {
     // console.log(data);
     return this.http.put(`${this.baseUrl}/user/${id}`, data);
   }
+  // Thay đổi mật khẩu
+
   // Cập nhật ảnh User
   upfileUser(slug, data) {
     return this.http.post(`${this.baseUrl}/uploadUser/${slug}`, data);

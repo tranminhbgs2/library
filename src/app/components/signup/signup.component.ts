@@ -59,6 +59,7 @@ export class SignupComponent implements OnInit {
   }
   // Message Error
   handleError(error) {
+    console.log(error);
     this.error = error.error.errors;
   }
 

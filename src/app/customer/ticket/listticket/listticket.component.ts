@@ -13,7 +13,7 @@ import { SnotifyService } from 'ng-snotify';
   styleUrls: ['./listticket.component.css']
 })
 export class ListticketComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['id', 'code', 'name_user', 'date_active', 'date_back', 'status', 'detail'];
+  displayedColumns: string[] = ['id', 'code', 'name_user', 'date_active', 'date_back', 'detail'];
   data: any;
   public dataSource = new MatTableDataSource<Ticket>();
   isloadingresults = true;
